@@ -39,7 +39,7 @@ The objectives of this lab were to:
 
 ---
 
-# Password Policy Configuration
+## Password Policy Configuration
 
 I navigated to:
 
@@ -98,9 +98,111 @@ This setting controls how long a password can remain active before Windows requi
 
 ---
 
-# Applying the Policy
+## Applying the Policy
 
 After configuring the security settings, I opened an elevated Command Prompt and ran:
 
-```cmd
-gpupdate /force
+`gpupdate /force`
+
+This forced Windows to immediately process the updated Group Policy settings.
+
+Both the Computer Policy and User Policy updates completed successfully.
+
+![Group Policy Update](screenshots/nist-gpupdate-force-success.png)
+
+---
+
+## Testing and Validation
+
+After applying the policy, I tested the configuration using a dedicated test account named:
+
+`PolicyTest`
+
+I used the following command to attempt password changes:
+
+`net user PolicyTest *`
+
+Testing the policy allowed me to verify that the security controls were actually being enforced rather than simply configured.
+
+---
+
+## Weak Password Test
+
+I attempted to assign a password that did not meet the configured password policy requirements.
+
+Windows rejected the password and returned a message stating that the password did not meet the password policy requirements.
+
+This confirmed that the policy was functioning correctly.
+
+![Weak Password Rejected](screenshots/nist-password-policy-rejected-weak-password.png)
+
+---
+
+## Strong Password Test
+
+I then repeated the test using a password that satisfied the configured requirements.
+
+Windows accepted the password and returned:
+
+`The command completed successfully.`
+
+This confirmed that compliant passwords were accepted while non-compliant passwords were rejected.
+
+![Strong Password Accepted](screenshots/nist-password-policy-accepted-strong-password.png)
+
+---
+
+## NIST 800-53 Control Mapping
+
+### AC-2 – Account Management
+
+AC-2 focuses on managing and protecting system accounts.
+
+The password policy implemented in this lab supports account security by enforcing authentication requirements for user accounts.
+
+### IA-5 – Authenticator Management
+
+IA-5 focuses on managing authenticators such as passwords and other credentials.
+
+The controls implemented in this lab support authenticator management by enforcing password requirements, limiting password reuse, and managing password expiration.
+
+---
+
+## Validation Results
+
+The lab demonstrated the complete security control implementation process:
+
+**Configure → Apply → Test → Validate**
+
+Results:
+
+- Minimum password length was successfully configured
+- Password complexity was enabled
+- Password history was enforced
+- Maximum password age was configured
+- Group Policy was successfully updated
+- Weak passwords were rejected
+- Compliant passwords were accepted
+- The security controls functioned as expected
+
+---
+
+## Key Takeaways
+
+This lab helped me understand how security framework requirements can be translated into real technical configurations.
+
+Instead of only reviewing NIST controls from a policy perspective, I implemented the controls directly in Windows and validated that they were working as intended.
+
+I gained hands-on experience with:
+
+- Windows Group Policy
+- Password policy configuration
+- Authentication security
+- Security control implementation
+- Security control validation
+- Windows command-line administration
+- Microsoft Azure Windows Server administration
+- NIST 800-53 control mapping
+- GRC control implementation
+
+One of the most important lessons from this lab was that security controls should not simply be configured and assumed to work. They should be **tested, validated, and documented with evidence**.
