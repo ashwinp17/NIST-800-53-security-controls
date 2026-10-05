@@ -1,10 +1,10 @@
-# NIST 800-53 Password Policy Implementation Lab
+# NIST 800-53 Security Controls Lab
 
 ## Project Overview
 
-This lab focused on implementing and validating password security controls on a Windows Server hosted in Microsoft Azure.
+This lab focused on implementing and validating Windows security controls using Group Policy on a Windows Server hosted in Microsoft Azure.
 
-I used the Local Group Policy Editor to configure password requirements, applied the updated policy, and tested the controls using a dedicated test account. The goal was to understand how NIST 800-53 security requirements can be translated into technical Windows configurations and then validated to confirm that the controls are functioning as intended.
+I configured password security requirements, applied the policy, and tested the controls using a dedicated test account. The goal was to understand how NIST 800-53 security requirements can be translated into technical system configurations and validated to confirm that the controls are functioning as intended.
 
 The lab primarily mapped to:
 
@@ -29,13 +29,13 @@ The lab primarily mapped to:
 
 The objectives of this lab were to:
 
-- Configure stronger password requirements using Group Policy
+- Configure stronger password requirements
 - Enforce password complexity
 - Prevent immediate password reuse
 - Configure password expiration
 - Apply updated Group Policy settings
 - Test whether the password policy was actually enforced
-- Connect technical Windows configurations to NIST 800-53 controls
+- Map technical configurations to NIST 800-53 controls
 
 ---
 
@@ -45,7 +45,7 @@ I navigated to:
 
 `Computer Configuration > Windows Settings > Security Settings > Account Policies > Password Policy`
 
-and configured the following security settings:
+I configured the following settings:
 
 | Security Setting | Configuration |
 |---|---|
@@ -60,21 +60,21 @@ and configured the following security settings:
 
 I configured the minimum password length to require passwords containing at least **14 characters**.
 
-This helps reduce the effectiveness of password guessing and brute-force attacks by increasing password length.
+Increasing password length helps make password guessing and brute-force attacks more difficult.
 
-![Minimum Password Length](nist-password-minimum-length-14.png)
+![Minimum Password Length](screenshots/Nist-800-53-minimum-password-length-14.png)
 
 ---
 
 ## 2. Password Complexity
 
-I enabled the Windows setting:
+I enabled:
 
 **Password must meet complexity requirements**
 
-This requires passwords to meet stronger complexity requirements instead of allowing simple passwords.
+This prevents users from creating overly simple passwords and requires stronger password construction.
 
-![Password Complexity](nist-password-complexity-enabled.png)
+![Password Complexity](screenshots/nist-password-complexity-enabled.png)
 
 ---
 
@@ -84,7 +84,7 @@ I configured Windows to remember the previous **5 passwords**.
 
 This prevents users from immediately reusing recently used passwords.
 
-![Password History](nist-password-history-5.png)
+![Password History](screenshots/nist-password-history-5.png)
 
 ---
 
@@ -94,13 +94,13 @@ I configured the maximum password age to **90 days**.
 
 This setting controls how long a password can remain active before Windows requires it to be changed.
 
-![Maximum Password Age](nist-password-max-age-90.png)
+![Maximum Password Age](screenshots/nist-password-max-age-90.png)
 
 ---
 
 # Applying the Policy
 
-After configuring the password settings, I opened an elevated Command Prompt and ran:
+After configuring the security settings, I opened an elevated Command Prompt and ran:
 
 ```cmd
 gpupdate /force
